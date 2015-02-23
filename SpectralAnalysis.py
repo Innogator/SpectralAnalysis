@@ -6,8 +6,6 @@ import numpy
 import math
 import re
 
-from matplotlib import pyplot as plt
-
 
 class SpectralAnalysis(object):
     def __init__(self, reader):

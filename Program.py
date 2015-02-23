@@ -4,9 +4,10 @@ __author__ = 'o1806'
 # local imports
 from ReadFDS import ReadFDS
 from SpectralAnalysis import SpectralAnalysis
+from FilePrompt import get_file_path
 
 # module imports
-import sys, getopt
+import wx
 import time
 import numpy as np
 from matplotlib import pyplot as plt
@@ -26,21 +27,19 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
-def main(argv):
+def main():
 
-    animate = True
+    animate = False
+
+    # get the file to open
+    file_in = get_file_path()
+    file_out = file_in + '_original.txt'
+    #file_processed = '../' + file_main + '_processed.txt'
 
     start = time.time()
 
     # set console color to green
     print(bcolors.OKGREEN)
-
-    file_main = 'Dataset10_Coupling_20_45_44_Event'
-    #file_main = 'part1.1_2014.07.08.15.35.48'
-    #file_main = 'takeawalk_2014.03.14.14.15.15'
-    file_in = '../../Python/Image Processing/Code/SignalAnalysis/' + file_main + '.fds'
-    file_out = '../' + file_main + '_original.txt'
-    file_processed = '../' + file_main + '_processed.txt'
 
     # define the file reader
     reader = ReadFDS(file_in, file_out)
@@ -103,20 +102,12 @@ def main(argv):
 
             #processed = np.insert(processed, 0, new_processed, 0)
 
-            if animate and \
-                    (iteration % 5 == 0 or iteration == num_frames + 1):
+            if animate and (iteration % 5 == 0 or iteration, num_frames + 1):
                 #image.set_data(processed)
                 image = plt.imshow(processed, aspect='auto')
-                #print(image.get_array())
-                #print("drawing")
                 plt.draw()
                 plt.pause(0.01)
                 plt.clf()
-        else:
-            pass
-            # the plot where we'll show the data
-            #imgplot = plt.imshow(processed, aspect='auto')
-            #imgplot.set_cmap('jet')  # 'seismic' is also a good setting
 
     end = time.time()
 
@@ -125,7 +116,6 @@ def main(argv):
 
     print(bcolors.ENDC)
 
-    plt.clf()
     plt.imshow(processed, aspect='auto')
     plt.colorbar()
     plt.show()
@@ -137,4 +127,4 @@ def main(argv):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    main()
