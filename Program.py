@@ -4,10 +4,10 @@ __author__ = 'o1806'
 # local imports
 from ReadFDS import ReadFDS
 from SpectralAnalysis import SpectralAnalysis
-from FilePrompt import get_file_path
+from SpectralAnalysisApp import SpectralAnalysisApp
+from SpectralAnalysisApp import get_file_path
 
 # module imports
-import wx
 import time
 import numpy as np
 from matplotlib import pyplot as plt
@@ -28,6 +28,12 @@ class bcolors:
 
 
 def main():
+
+    #app = SpectralAnalysisApp(None)
+    #app.title('Spectral Analysis')
+    #app.mainloop()
+
+    #exit()
 
     animate = False
 
